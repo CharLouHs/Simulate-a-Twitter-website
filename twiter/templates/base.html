@@ -11,8 +11,8 @@
     {% endif %}
 </head>
 <body>
-    <div>Twittor:<a href="/">Home</a>
-    <a href="/login">Login</a>
+    <div>Twittor:<a href="{{url_for('index')}}">Home</a>
+    <a href="{{url_for('login')}}">Login</a>
     </div>
     <hr>
     {% block content %}{% endblock %}

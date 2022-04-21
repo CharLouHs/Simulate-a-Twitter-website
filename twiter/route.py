@@ -1,4 +1,4 @@
-from flask import Flask, render_template,redirect
+from flask import Flask, render_template,redirect, url_for
 from twiter.forms import LoginForm
 
 
@@ -21,7 +21,7 @@ def login():
             form.remem_me.data
         ))
         print(msg)
-        return redirect('/')
+        return redirect(url_for('index'))
     else:
         print(form.errors)
     
