@@ -1,6 +1,6 @@
 from flask import Flask, render_template,redirect, url_for
 from twiter.forms import LoginForm
-from twiter.models import User
+from twiter.models import User,Tweet
 from twiter import db
 
 def index():
