@@ -7,6 +7,7 @@ class User(db.Model):
     password_hash=db.Column(db.String(128))
     phone=db.Column(db.String(32))
     tweets= db.relationship('Tweet',backref='author',lazy='dynamic')
+
     def __repr__(self) :
         return 'id={}, username={}, email={},password_hash={}'.format(
             self.id,self.username,self.email,self.password_hash
@@ -19,6 +20,6 @@ class Tweet(db.Model):
     user_id=db.Column(db.Integer,db.ForeignKey('user.id'))
 
     def __repr__(self):
-        return "tweet={}, create at {}".format(
-            self.body,self.create_time
+        return "id={}, body={}, tweet={}, create at {}".format(
+            self.body,self.body,self.create_time,self.user_id
         )

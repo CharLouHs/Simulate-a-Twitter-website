@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-
+from twiter.config import Config
 db=SQLAlchemy()
 migrate=Migrate()
 from twiter.route import index, login
@@ -9,10 +9,10 @@ from twiter.route import index, login
 
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI']='sqlite:////Flask/main/twiter.db'
+    #app.config['SQLALCHEMY_DATABASE_URI']='sqlite:////Flask/main/twiter.db'
     #app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:root@localhost:3306/flask'
     #app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
-   
+    app.config.from_object(Config)
     db.init_app(app)
     
     migrate.init_app(app,db)
