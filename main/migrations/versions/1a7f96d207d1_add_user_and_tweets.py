@@ -1,8 +1,8 @@
-"""create user and twitter
+"""add user and tweets
 
-Revision ID: 152a245f6171
+Revision ID: 1a7f96d207d1
 Revises: 
-Create Date: 2022-04-24 00:51:32.531958
+Create Date: 2022-04-24 11:42:30.416496
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '152a245f6171'
+revision = '1a7f96d207d1'
 down_revision = None
 branch_labels = None
 depends_on = None
