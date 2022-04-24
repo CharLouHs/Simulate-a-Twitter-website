@@ -20,6 +20,6 @@ class Tweet(db.Model):
     user_id=db.Column(db.Integer,db.ForeignKey('user.id'))
 
     def __repr__(self):
-        return "id={}, body={}, tweet={}, create at {}".format(
-            self.body,self.body,self.create_time,self.user_id
+        return "id={}, body={}, tweet={}, user_id= {}".format(
+            self.id,self.body,self.create_time,self.user_id
         )
