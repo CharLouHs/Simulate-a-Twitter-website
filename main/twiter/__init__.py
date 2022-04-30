@@ -2,12 +2,13 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+
 from twiter.config import Config
 db=SQLAlchemy()
 migrate=Migrate()
 login_manager=LoginManager()
 login_manager.login_view='login'
-from twiter.route import index, login,logout,register
+from twiter.route import index, login,logout,register,user,pageNotFound
 
 
 def create_app():
@@ -25,7 +26,10 @@ def create_app():
     app.add_url_rule('/','index',index)
     app.add_url_rule('/login','login',login,methods=['GET','POST'])
     app.add_url_rule('/logout','logout',logout)
+    app.add_url_rule('/<username>','profile',user)
     app.add_url_rule('/register','register',register,methods=['GET','POST'])
+    app.register_error_handler(404,pageNotFound)
+    
     return app
 
 

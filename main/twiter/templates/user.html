@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+    
+    <table>
+        <tr>
+            <td><img src="{{user.avatar()}}" alt=""></td>
+            <td>
+                <p><b>{{user.username}}</b></p>
+                {% if user.about_me %}
+                <p>About me : {{user.about_me}}</p>
+                {% endif %}
+
+                {% if user.create_time %}
+                <p>Joined : {{user.create_time}}</p>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+    {% for post in posts %}
+    <table>
+        <tr>
+            <td><img src="{{user.avatar(60)}}" alt=""></td>
+            <td><p>{{post.author.username}}says: <b>{{post.body}}</b></p></td>
+        </tr>
+    </table>
+    {% endfor %}
+{% endblock %}
+
+
+
+
+
