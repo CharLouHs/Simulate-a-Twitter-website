@@ -1,8 +1,9 @@
 from ast import Sub
 from tokenize import String
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField,BooleanField,SubmitField
-from wtforms.validators import DataRequired, email_validator,Email,EqualTo,ValidationError
+from wtforms import StringField,PasswordField,BooleanField,SubmitField,TextAreaField
+    
+from wtforms.validators import DataRequired, email_validator,Email,EqualTo,ValidationError,Length
 from twiter.models import User
 
 class LoginForm(FlaskForm):
@@ -30,3 +31,7 @@ class RegisterForm(FlaskForm):
         user=User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('please use different email address')   
+
+class EditProfileForm(FlaskForm):
+    about_me=TextAreaField('About me',validators=[Length(min=0,max=120)])
+    submit = SubmitField('Save')

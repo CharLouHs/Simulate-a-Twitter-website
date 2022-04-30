@@ -1,4 +1,5 @@
 from flask import Flask, render_template,redirect, url_for,request,abort
+from twiter.forms import EditProfileForm
 from twiter.forms import LoginForm,RegisterForm
 from flask_login import login_user,current_user, logout_user,login_required
 from twiter.models import User,Tweet
@@ -70,3 +71,13 @@ def user(username):
 
 def pageNotFound(e):
     return render_template('404.html',title='404'),404
+
+def edit_profile():
+    form=EditProfileForm()
+    if request.method == 'GET':
+        form.about_me.data=current_user.about_me
+    if form.validate_on_submit():
+        current_user.about_me=form.about_me.data
+        db.session.commit()
+        return redirect(url_for('profile',username=current_user.username))
+    return render_template('edit_profile.html',form=form)
