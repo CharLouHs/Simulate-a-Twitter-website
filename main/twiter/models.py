@@ -1,6 +1,9 @@
-from twiter import db
+from twiter import db,login_manager
+from flask_login import UserMixin
 from datetime import datetime
-class User(db.Model):
+from werkzeug.security import generate_password_hash,check_password_hash
+from flask_login import UserMixin #可以提供用戶篩選管理的方法
+class User(db.Model,UserMixin):
     id=db.Column(db.Integer,primary_key=True)
     username=db.Column(db.String(64),unique=True)
     email=db.Column(db.String(64),unique=True,index=True)
@@ -12,6 +15,15 @@ class User(db.Model):
         return 'id={}, username={}, email={},password_hash={}'.format(
             self.id,self.username,self.email,self.password_hash
         )
+    def set_password(self,password):
+        self.password_hash=generate_password_hash(password)
+
+    def check_password(self,password):
+        return check_password_hash(self.password_hash,password)
+
+@login_manager.user_loader
+def get_user(id):
+    return User.query.get(int(id))
 
 class Tweet(db.Model):
     id=db.Column(db.Integer,primary_key=True)
