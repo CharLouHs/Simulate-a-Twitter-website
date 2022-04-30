@@ -1,5 +1,5 @@
 from flask import Flask, render_template,redirect, url_for,request
-from twiter.forms import LoginForm
+from twiter.forms import LoginForm,RegisterForm
 from flask_login import login_user,current_user, logout_user,login_required
 from twiter.models import User,Tweet
 from twiter import db
@@ -44,3 +44,15 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = RegisterForm()
+    if form.validate_on_submit():
+        user=User(username=form.username.data,email=form.email.data)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for('login'))
+    return render_template('register.html',title="Registration",form=form)
