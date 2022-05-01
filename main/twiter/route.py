@@ -13,6 +13,7 @@ def index():
         
 
     ]
+    
     return render_template('index.html',posts=posts)
 
 def login():
@@ -67,6 +68,15 @@ def user(username):
         {'author':{'username':u.username},'body':"hi i am {}".format(u.username)},
         {'author':{'username':u.username},'body':"hi i am {}".format(u.username)}
     ]
+    if request.method=='POST':
+        if request.form['request_button'] == "Follow":
+            current_user.follow(u)
+            db.session.commit()
+            print("click follow")
+        else:
+            current_user.unfollow(u)
+            db.session.commit()
+            print("click unfollow")
     return render_template('user.html',title='Profile',posts=posts,user=u)
 
 def pageNotFound(e):

@@ -26,7 +26,7 @@ def create_app():
     app.add_url_rule('/','index',index)
     app.add_url_rule('/login','login',login,methods=['GET','POST'])
     app.add_url_rule('/logout','logout',logout)
-    app.add_url_rule('/<username>','profile',user)
+    app.add_url_rule('/<username>','profile',user,methods=['GET','POST'])
     app.add_url_rule('/edit_profile','edit_profile',edit_profile,methods=['GET','POST'])
     app.add_url_rule('/register','register',register,methods=['GET','POST'])
     app.register_error_handler(404,pageNotFound)
