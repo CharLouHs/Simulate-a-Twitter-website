@@ -22,8 +22,8 @@ def create_app():
     migrate.init_app(app,db)
     login_manager.init_app(app)
     app.config['SECRET_KEY'] = '123'
-    app.add_url_rule('/index','index',index)
-    app.add_url_rule('/','index',index)
+    app.add_url_rule('/index','index',index,methods=['GET','POST'])
+    app.add_url_rule('/','index',index,methods=['GET','POST'])
     app.add_url_rule('/login','login',login,methods=['GET','POST'])
     app.add_url_rule('/logout','logout',logout)
     app.add_url_rule('/<username>','profile',user,methods=['GET','POST'])
